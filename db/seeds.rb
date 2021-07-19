@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+1000.times do
+  Product.create do |product|
+    product.name = Faker::Commerce.product_name
+    product.color = Faker::Color.color_name
+    product.price = Faker::Commerce.price
+    product.sku = Faker::Code.npi
+  end
+  User.create do |user|
+    user.name = Faker::Name.name
+    user.email = Faker::Internet.email
+    user.favorite_color = Faker::Color.color_name
+  end
+end

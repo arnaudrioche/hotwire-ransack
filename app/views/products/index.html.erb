@@ -1,0 +1,51 @@
+
+<%= turbo_stream_from :products %>
+
+<h1>Products</h1>
+<%= search_form_for @query do |f| %>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>
+          <div class='form-group'>
+            <%= sort_link(@query, :name) %>
+            <%= f.search_field :name_cont, class: 'form-control' %>
+          </div>
+        </th>
+        <th>
+          <div class='form-group'>
+            <%= sort_link(@query, :color) %>
+            <%= f.search_field :color_cont, class: 'form-control' %>
+          </div>
+        </th>
+        <th>
+          <div class='form-group'>
+            <%= sort_link(@query, :price) %>
+            <%= f.search_field :price_cont, class: 'form-control' %>
+          </div>
+        </th>
+        <th>
+          <div class='form-group'>
+            <%= sort_link(@query, :sku) %>
+            <%= f.search_field :sku_cont, class: 'form-control' %>
+          </div>
+        </th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+        <%= content_tag :tr, id: dom_id(product) do %>
+          <td><%= product.name %></td>
+          <td><%= product.color %></td>
+          <td><%= product.price %></td>
+          <td><%= product.sku %></td>
+          <td><%= link_to 'Show', product %></td>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
